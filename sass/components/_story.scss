@@ -1,0 +1,82 @@
+.story {
+    padding: 9rem;
+    margin: 0 auto;
+    background-color: rgba(white, 0.6);
+    box-shadow: 0 3rem 6rem rgba(black, .1);
+    border-radius: 3px;
+    transform: skewX(-12deg);
+
+    @include respond(tab-port) {
+        width: 100%;
+        padding: 4rem;
+    }
+
+    @include respond(phone) {
+        transform: skewX(0);
+    }
+    
+
+    &__text {
+        font-size: $default-font-size;
+        transform: skewX(12deg);
+
+        @include respond(phone) {
+            transform: skewX(0);
+        }
+        
+    }
+
+    &__shape {
+        width: 15rem;
+        height: 15rem;
+        float: left;
+        shape-outside: circle(50% at 50% 50%);
+        -webkit-shape-outside: circle(50% at 50% 50%);
+        clip-path: circle(50% at 50% 50%);
+        -webkit-clip-path: circle(50% at 50% 50%);
+        transform: translateX(-3rem) skewX(12deg);
+        position: relative;
+        //THIS WAS NECESSARY TO FIX GLITCH ON HOVER where edges of image were showing outside of clip to circle had to hide overflow from shape
+        overflow: hidden;
+
+        @include respond(phone) {
+            transform: translateX(-3rem) skewX(0);
+        }
+
+    }
+
+    &__img {
+        height: 100%;
+        //fixed a minor glitch when hovering animation on the image a little catch
+        backface-visibility: hidden;
+        transform: translateX(-4rem) scale(1.4);
+
+        transition: all .5s;
+
+    }
+
+    &__caption {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 20%);
+        color: white;
+        font-size: 1.8rem;
+        font-weight: 500;
+        text-align: center;
+        text-transform: uppercase;
+        opacity: 0;
+        transition: all .5s;
+    }
+
+    &:hover &__caption {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+
+    &:hover &__img {
+        transform: translateX(-4rem) scale(1);
+        filter: blur(10px) brightness(80%);
+        
+    }
+}
